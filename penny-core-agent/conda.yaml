@@ -1,0 +1,7 @@
+name: core-env
+dependencies:
+  - python=3.10
+  - pip:
+    - transformers
+    - torch
+    - azureml-defaults

@@ -1,0 +1,27 @@
+# Penny Sentiment Agent - Azure ML Endpoint Configuration
+# Defines the managed online endpoint for sentiment analysis and community feedback monitoring
+# Part of Penny's civic engagement AI platform
+
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+
+name: penny-sentiment-endpoint
+description: "Sentiment analysis endpoint for Penny's civic engagement AI - monitors community feedback and engagement tone"
+
+auth_mode: key
+
+properties:
+  enforce_access_to_default_secret_stores: false
+
+tags:
+  project: penny-civic-ai
+  service: sentiment-analysis
+  environment: production
+  managed_by: azure-ml
+  version: "1.0"
+
+public_network_access: enabled
+
+traffic:
+  penny-sentiment-agent-deployment: 100
+
+mirror_traffic: {}

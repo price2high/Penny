@@ -1,0 +1,27 @@
+# Penny Core Agent - Azure ML Endpoint Configuration
+# Defines the managed online endpoint for core conversational AI service
+# Part of Penny's civic engagement AI platform
+
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+
+name: penny-core-endpoint
+description: "Core conversational AI endpoint for Penny's civic engagement AI - provides natural language responses for civic queries"
+
+auth_mode: key
+
+properties:
+  enforce_access_to_default_secret_stores: false
+
+tags:
+  project: penny-civic-ai
+  service: core-llm
+  environment: production
+  managed_by: azure-ml
+  version: "1.0"
+
+public_network_access: enabled
+
+traffic:
+  penny-core-agent-deployment: 100
+
+mirror_traffic: {}

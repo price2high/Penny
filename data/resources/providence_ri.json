@@ -1,0 +1,115 @@
+{
+  "city": "Providence",
+  "state": "Rhode Island",
+  "tenant_id": "providence_ri",
+  "legal_notes": {
+      "behavioral_health": "state_only",
+      "csb_authority": "none",
+      "events_source": "city_official_site",
+      "transit_source": "city",
+      "trash_source": "city",
+      "public_safety_source": "city",
+      "warming_center_authority": "city",
+      "sexual_health_authority": "state"
+  },
+  "official_links": {
+      "city_homepage": "https://www.providenceri.gov/",
+      "events_calendar": "https://www.downtownprovidence.com/event-calendar/",
+      "public_health": "https://health.ri.gov/",
+      "transit": "https://www.ripta.com/",
+      "libraries": "https://www.provcomlib.org/",
+      "parks_and_recreation": "https://www.providenceri.gov/providence-parks/",
+      "emergency_management": "https://www.providenceri.gov/emergency-management-agency/",
+      "trash": "https://www.providenceri.gov/public-works/streets-sanitation/"
+  },
+  "services": {
+      "behavioral_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "BH Link (Behavioral Health Hotline)",
+                  "link": "https://www.bhlink.org/",
+                  "phone": "401-414-LINK (5465)",
+                  "notes": "24/7 mental health and substance use crisis hotline for all Rhode Island residents. Penny should always refer users here for crisis situations."
+              },
+              {
+                  "name": "Rhode Island Dept. of Behavioral Healthcare",
+                  "link": "https://www.bhddh.ri.gov/",
+                  "phone": "",
+                  "notes": "State authority for long term mental health, developmental disability, and addiction services."
+              }
+          ]
+      },
+      "sexual_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Rhode Island Dept. of Health – STD Prevention",
+                  "link": "https://health.ri.gov/programs/std/",
+                  "phone": "401-222-2577",
+                  "notes": "State program offering confidential testing and treatment services. Penny should prioritize this official source."
+              },
+              {
+                  "name": "Planned Parenthood – Providence Health Center",
+                  "link": "https://www.plannedparenthood.org/health-center/rhode-island/providence/02903/providence-health-center-3991-90490",
+                  "phone": "401-421-9500",
+                  "notes": "Major nonprofit provider of sexual health services, testing, and contraception in the area."
+              }
+          ]
+      },
+      "warming_and_cooling_centers": {
+          "allowed": true,
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Providence Community Recreation Centers",
+                  "address": "Varies by activation",
+                  "season": "winter/summer",
+                  "link": "https://www.providenceri.gov/providence-parks/",
+                  "notes": "City community centers are activated as warming centers during extreme cold and cooling centers during extreme heat. Penny must advise users to check the city's official social media or hotline for current sites."
+              }
+          ]
+      },
+      "trash_and_recycling": {
+          "authority": "city",
+          "pickup_days": "Varies by zone. Collection schedules are published by the Department of Public Works.",
+          "holiday_schedule_link": "https://www.providenceri.gov/public-works/streets-sanitation/"
+      },
+      "transit": {
+          "authority": "state",
+          "provider": "RIPTA (Rhode Island Public Transit Authority)",
+          "routes_link": "https://www.ripta.com/routes/",
+          "planner_link": "https://www.ripta.com/"
+      },
+      "emergency": {
+          "authority": "city",
+          "alerts_link": "https://www.providenceri.gov/emergency-management-agency/",
+          "non_emergency_phone": "401-272-3121 (Police Non Emergency)",
+          "emergency_management_link": "https://www.providenceri.gov/emergency-management-agency/"
+      },
+      "libraries": {
+          "authority": "city",
+          "resources": [
+              {
+                  "branch": "Providence Community Library – Central",
+                  "address": "150 Empire St, Providence, RI 02903",
+                  "link": "https://www.provcomlib.org/",
+                  "notes": "Main branch of the city library system offering access to computers, Wi-Fi, and community resources."
+              }
+          ]
+      },
+      "community_centers": {
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Fox Point Community Center",
+                  "address": "446 Wickenden St, Providence, RI 02903",
+                  "link": "https://www.providenceri.gov/providence-parks/fox-point-community-center/",
+                  "notes": "Offers recreational programs, afterschool activities, and senior services for the East Side neighborhood."
+              }
+          ]
+      }
+  }
+}

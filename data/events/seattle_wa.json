@@ -1,0 +1,65 @@
+{
+    "tenant_id": "seattle_wa",
+    "source": "https://visitseattle.org/things-to-do/events/",
+    "notes": "Pulled from Visit Seattle's city-run event calendar. Focuses on cultural, arts, music, and public city events. All event times are in ISO 8601 UTC format.",
+    "event_categories": [
+        "arts_and_entertainment_outdoor",
+        "family_friendly",
+        "music_and_festivals_outdoor",
+        "community_engagement"
+    ],
+    "how_to_access": {
+        "general": "Visit the official Seattle tourism event calendar for details. Penny provides relevant highlights.",
+        "calendar_link": "https://visitseattle.org/things-to-do/events/"
+    },
+    "events": [
+        {
+            "event_id": "SEA_ART_1218",
+            "name": "Seattle Winter Lights Festival",
+            "description": "A walk-through light installation and winter art experience celebrating the season downtown. Primarily an outdoor, walking event.",
+            "start_time": "2025-12-18T16:30:00Z",
+            "end_time": "2025-12-18T22:00:00Z",
+            "location": {
+                "name": "Seattle Center (Outdoor/Tented)",
+                "address": "305 Harrison St, Seattle, WA 98109",
+                "latitude": 47.6205,
+                "longitude": -122.3493
+            },
+            "category": "arts_and_entertainment_outdoor",
+            "url": "https://visitseattle.org/",
+            "is_paid": false
+        },
+        {
+            "event_id": "SEA_MARKET_1220",
+            "name": "Holiday Market at Westlake Park",
+            "description": "Local artisans, music, and food celebrating Seattle's creative scene and winter festivities. Held outdoors in the plaza.",
+            "start_time": "2025-12-20T11:00:00Z",
+            "end_time": "2025-12-20T19:00:00Z",
+            "location": {
+                "name": "Westlake Park",
+                "address": "401 Pine St, Seattle, WA 98101",
+                "latitude": 47.6111,
+                "longitude": -122.3370
+            },
+            "category": "family_friendly",
+            "url": "https://visitseattle.org/",
+            "is_paid": false
+        },
+        {
+            "event_id": "SEA_NYE_1231",
+            "name": "New Year's Eve Fireworks at the Space Needle",
+            "description": "Ring in the New Year with a spectacular fireworks display and live music in Seattle's iconic landmark. Large outdoor gathering.",
+            "start_time": "2025-12-31T23:30:00Z",
+            "end_time": "2026-01-01T00:30:00Z",
+            "location": {
+                "name": "Space Needle (Viewing Area)",
+                "address": "400 Broad St, Seattle, WA 98109",
+                "latitude": 47.6205,
+                "longitude": -122.3493
+            },
+            "category": "music_and_festivals_outdoor",
+            "url": "https://www.spaceneedle.com/nyeseattle",
+            "is_paid": false
+        }
+    ]
+}

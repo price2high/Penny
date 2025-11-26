@@ -1,0 +1,112 @@
+{
+    "tenant_id": "birmingham_al",
+    "city_name": "Birmingham",
+    "state": "AL",
+    "timezone": "America/Chicago",
+    "source": "https://www.birminghamal.gov/events",
+    "last_updated": "2025-01-15T00:00:00Z",
+    "data_version": "1.0",
+    "notes": "Official Birmingham civic events cache. Events sourced from city calendar and verified community partners. All times in ISO 8601 UTC format. Remove past events during monthly maintenance.",
+    "events": [
+        {
+            "event_id": "BHM_MUSEUM_401",
+            "name": "Birmingham Civil Rights Institute Tour",
+            "description": "Self-guided tour through the history of the Civil Rights Movement. Indoor event suitable for all weather conditions. Educational and moving experience for all ages.",
+            "start_time": "2025-11-20T14:00:00Z",
+            "end_time": "2025-11-20T17:00:00Z",
+            "location": {
+                "name": "Birmingham Civil Rights Institute",
+                "address": "520 16th St N, Birmingham, AL 35203",
+                "city": "Birmingham",
+                "state": "AL",
+                "zip_code": "35203",
+                "latitude": 33.5188,
+                "longitude": -86.8143
+            },
+            "category": "indoor_civic",
+            "tags": ["museum", "civil_rights", "history", "educational", "indoor", "self_guided", "cultural"],
+            "url": "https://www.bcri.org/",
+            "is_paid": true,
+            "is_recurring": false,
+            "recurrence_pattern": null,
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "info@bcri.org",
+                "phone": "205-328-9696"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false
+        },
+        {
+            "event_id": "BHM_PARK_502",
+            "name": "Railroad Park Yoga and Fitness Morning",
+            "description": "Free outdoor yoga session hosted on the lawn. Bring your own mat and dress for the weather. Great way to start your day with community wellness.",
+            "start_time": "2025-11-22T07:30:00Z",
+            "end_time": "2025-11-22T08:30:00Z",
+            "location": {
+                "name": "Railroad Park",
+                "address": "1600 1st Ave S, Birmingham, AL 35233",
+                "city": "Birmingham",
+                "state": "AL",
+                "zip_code": "35233",
+                "latitude": 33.5097,
+                "longitude": -86.8041
+            },
+            "category": "outdoor_fitness",
+            "tags": ["yoga", "fitness", "outdoor", "free", "wellness", "community", "morning"],
+            "url": "https://www.railroadpark.org/events",
+            "is_paid": false,
+            "is_recurring": true,
+            "recurrence_pattern": "weekly_saturday",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "info@railroadpark.org",
+                "phone": "205-521-0420"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false,
+            "requirements": ["bring_yoga_mat", "weather_appropriate_clothing"]
+        },
+        {
+            "event_id": "BHM_FOOD_603",
+            "name": "Pepper Place Market",
+            "description": "Birmingham's premier farmers market, offering fresh produce, local foods, and artisanal goods. Large outdoor venue with community atmosphere.",
+            "start_time": "2025-11-23T07:00:00Z",
+            "end_time": "2025-11-23T12:00:00Z",
+            "location": {
+                "name": "Pepper Place",
+                "address": "2829 2nd Ave S, Birmingham, AL 35233",
+                "city": "Birmingham",
+                "state": "AL",
+                "zip_code": "35233",
+                "latitude": 33.5173,
+                "longitude": -86.7915
+            },
+            "category": "outdoor_market",
+            "tags": ["farmers_market", "local_food", "artisan", "outdoor", "community", "weekly", "produce"],
+            "url": "https://www.pepperplacemarket.com/",
+            "is_paid": false,
+            "is_recurring": true,
+            "recurrence_pattern": "weekly_saturday",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "info@pepperplacemarket.com",
+                "phone": "205-458-8400"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false
+        }
+    ]
+}

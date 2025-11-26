@@ -1,0 +1,111 @@
+{
+    "tenant_id": "atlanta_ga",
+    "city_name": "Atlanta",
+    "state": "GA",
+    "timezone": "America/New_York",
+    "source": "https://www.atlantaga.gov/i-want-to-/advanced-components/event-list-view",
+    "last_updated": "2025-01-15T00:00:00Z",
+    "data_version": "1.0",
+    "notes": "Official Atlanta civic events cache. Events sourced from city calendar and verified community partners. All times in ISO 8601 UTC format. Remove past events during monthly maintenance.",
+    "events": [
+        {
+            "event_id": "ATL_PARK_101",
+            "name": "Piedmont Park Farmer's Market",
+            "description": "Weekly market featuring local produce, artisan foods, and community vendors. Held outdoors, rain or shine.",
+            "start_time": "2025-11-23T08:00:00Z",
+            "end_time": "2025-11-23T12:00:00Z",
+            "location": {
+                "name": "Piedmont Park, Green Meadow",
+                "address": "1342 Piedmont Ave NE, Atlanta, GA 30309",
+                "city": "Atlanta",
+                "state": "GA",
+                "zip_code": "30309",
+                "latitude": 33.7915,
+                "longitude": -84.3734
+            },
+            "category": "outdoor_market",
+            "tags": ["farmers_market", "local_food", "community", "outdoor", "weekly"],
+            "url": "https://www.piedmontpark.org/market/",
+            "is_paid": false,
+            "is_recurring": true,
+            "recurrence_pattern": "weekly_sunday",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "info@piedmontpark.org",
+                "phone": null
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false
+        },
+        {
+            "event_id": "ATL_TOWN_205",
+            "name": "City Council Town Hall Meeting on Zoning",
+            "description": "Public forum to discuss proposed changes to residential and commercial zoning ordinances in District 5. Community input welcomed.",
+            "start_time": "2025-11-25T18:30:00Z",
+            "end_time": "2025-11-25T20:00:00Z",
+            "location": {
+                "name": "Atlanta City Hall, Council Chambers",
+                "address": "55 Trinity Ave SW, Atlanta, GA 30303",
+                "city": "Atlanta",
+                "state": "GA",
+                "zip_code": "30303",
+                "latitude": 33.7547,
+                "longitude": -84.3912
+            },
+            "category": "indoor_civic",
+            "tags": ["town_hall", "city_council", "zoning", "public_forum", "civic_engagement"],
+            "url": "https://www.atlantaga.gov/meetings",
+            "is_paid": false,
+            "is_recurring": false,
+            "recurrence_pattern": null,
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "citycouncil@atlantaga.gov",
+                "phone": "404-330-6030"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false
+        },
+        {
+            "event_id": "ATL_ARTS_310",
+            "name": "High Museum Free Admission Day",
+            "description": "Enjoy free admission to all exhibits at the High Museum of Art. Perfect for families and art lovers. Indoor venue ideal for any weather.",
+            "start_time": "2025-11-28T10:00:00Z",
+            "end_time": "2025-11-28T17:00:00Z",
+            "location": {
+                "name": "High Museum of Art",
+                "address": "1280 Peachtree St NE, Atlanta, GA 30309",
+                "city": "Atlanta",
+                "state": "GA",
+                "zip_code": "30309",
+                "latitude": 33.7909,
+                "longitude": -84.3837
+            },
+            "category": "indoor_leisure",
+            "tags": ["museum", "art", "free_admission", "indoor", "family_friendly", "cultural"],
+            "url": "https://high.org/visit/",
+            "is_paid": false,
+            "is_recurring": true,
+            "recurrence_pattern": "monthly_second_thursday",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "information@high.org",
+                "phone": "404-733-4400"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false
+        }
+    ]
+}

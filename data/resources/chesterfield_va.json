@@ -1,0 +1,109 @@
+{
+  "city": "Chesterfield County",
+  "state": "Virginia",
+  "tenant_id": "chesterfield_va",
+  "legal_notes": {
+      "behavioral_health": "csb_supported",
+      "csb_authority": "local",
+      "events_source": "county_official_site",
+      "transit_source": "regional_partner",
+      "trash_source": "county",
+      "public_safety_source": "county",
+      "warming_center_authority": "county",
+      "sexual_health_authority": "state"
+  },
+  "official_links": {
+      "county_homepage": "https://www.chesterfield.gov/",
+      "events_calendar": "https://www.chesterfield.gov/5932/Things-to-Do",
+      "public_works": "https://www.chesterfield.gov/178/Public-Utilities",
+      "transit": "https://www.ridegrtc.com/",
+      "libraries": "https://library.chesterfield.gov/",
+      "parks_and_recreation": "https://www.chesterfield.gov/148/Parks-Recreation",
+      "warming_centers": "https://www.chesterfield.gov/1943/Warming-Centers",
+      "emergency_management": "https://www.chesterfield.gov/153/Emergency-Management"
+  },
+  "services": {
+      "behavioral_health": {
+          "allowed": true,
+          "authority": "local",
+          "resources": [
+              {
+                  "name": "Chesterfield Community Services Board (CSB)",
+                  "link": "https://www.chesterfield.gov/159/Mental-Health-Support-Services",
+                  "phone": "804-748-1227",
+                  "notes": "Need mental health, addiction support, or developmental disability help? The CSB provides confidential services for Chesterfield residents."
+              }
+          ]
+      },
+      "sexual_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Virginia Department of Health – STD Services",
+                  "link": "https://www.vdh.virginia.gov/std/",
+                  "phone": "804-864-8000",
+                  "notes": "For testing, treatment, and prevention of STDs across Virginia, Penny connects residents here."
+              },
+              {
+                  "name": "Chesterfield Health District – Sexual Health",
+                  "link": "https://www.vdh.virginia.gov/chesterfield/",
+                  "phone": "804-748-1691",
+                  "notes": "Local district office offering public health services, including HIV/STD testing. Great nearby option for residents."
+              }
+          ]
+      },
+      "warming_and_cooling_centers": {
+          "allowed": true,
+          "authority": "county",
+          "resources": [
+              {
+                  "name": "Chesterfield County Warming Centers",
+                  "address": "",
+                  "season": "winter",
+                  "link": "https://www.chesterfield.gov/1943/Warming-Centers",
+                  "notes": "During freezing temperatures, the county activates warming sites. Penny should advise users to check the provided link for current activation status and locations."
+              }
+          ]
+      },
+      "trash_and_recycling": {
+          "authority": "county",
+          "pickup_days": "Trash and recycling pickup depends on your address and hauler. You can contact GFL or visit the county site for exact schedules.",
+          "holiday_schedule_link": "https://www.chesterfield.gov/172/Trash-Collection"
+      },
+      "transit": {
+          "authority": "regional_partner",
+          "provider": "GRTC Transit System",
+          "routes_link": "https://ridegrtc.com/routes/",
+          "planner_link": "https://ridegrtc.com/"
+      },
+      "emergency": {
+          "authority": "county",
+          "alerts_link": "https://www.chesterfield.gov/153/Emergency-Management",
+          "non_emergency_phone": "804-748-1251",
+          "emergency_management_link": "https://www.chesterfield.gov/153/Emergency-Management"
+      },
+      "libraries": {
+          "authority": "county",
+          "resources": [
+              {
+                  "branch": "Chesterfield County Public Library – Central",
+                  "address": "7051 Lucy Corr Blvd, Chesterfield, VA 23832",
+                  "link": "https://library.chesterfield.gov/",
+                  "notes": "Books, free Wi-Fi, job help, and cozy spaces to study or chill — Penny recommends stopping by!"
+              }
+          ]
+      },
+      "community_centers": {
+          "authority": "county",
+          "resources": [
+              {
+                  "name": "Ettrick Recreation Center",
+                  "address": "20621 Woodpecker Rd, South Chesterfield, VA 23803",
+                  "link": "https://www.chesterfield.gov/148/Parks-Recreation",
+                  "notes": "Looking for fun programs, senior activities, or rental space? This friendly center has it all."
+              }
+          ]
+      }
+  }
+}

@@ -1,0 +1,129 @@
+# PENNY Project - Azure ML Production .gitignore
+# Civic Engagement AI - GitHub Repository Protection
+
+# ============================================
+# CRITICAL: Secrets & Credentials
+# ============================================
+*.env
+.env.*
+secrets.json
+config/secrets.yaml
+azure_credentials.json
+*.key
+*.pem
+*.pfx
+*.p12
+
+# ============================================
+# Azure ML & Cloud Resources
+# ============================================
+.azureml/
+azureml-logs/
+outputs/
+logs/
+*.amlignore
+
+# ============================================
+# Python Runtime & Dependencies
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+.conda/
+
+# ============================================
+# ML Models & Data (Large Files)
+# ============================================
+models/*.bin
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.h5
+models/*.pkl
+*.safetensors
+data/raw/*
+data/processed/*
+!data/.gitkeep
+*.csv
+*.parquet
+
+# Model checkpoints
+checkpoints/
+*.ckpt
+
+# ============================================
+# Testing & Coverage
+# ============================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+
+# ============================================
+# Jupyter & Colab
+# ============================================
+.ipynb_checkpoints/
+*.ipynb
+!docs/*.ipynb
+
+# ============================================
+# IDE & Editor Files
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Logging & Debugging
+# ============================================
+*.log
+logs/
+app_logs/
+debug.log
+error.log
+
+# ============================================
+# Temporary & Cache Files
+# ============================================
+*.tmp
+*.bak
+*.cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# ============================================
+# Docker (if using local builds)
+# ============================================
+.dockerignore
+
+# ============================================
+# Local Development Only
+# ============================================
+local_test.py
+scratch/
+experiments/
+temp/

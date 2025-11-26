@@ -1,0 +1,109 @@
+{
+  "city": "Seattle",
+  "state": "Washington",
+  "tenant_id": "seattle_wa",
+  "legal_notes": {
+      "behavioral_health": "allowed",
+      "csb_authority": "city_department",
+      "events_source": "city_official_site",
+      "transit_source": "city",
+      "trash_source": "city",
+      "public_safety_source": "city",
+      "warming_center_authority": "city",
+      "sexual_health_authority": "city"
+  },
+  "official_links": {
+      "city_homepage": "https://www.seattle.gov/",
+      "events_calendar": "https://visitseattle.org/things-to-do/events/",
+      "public_health": "https://www.seattle.gov/human-services",
+      "transit": "https://kingcounty.gov/depts/transportation/metro.aspx",
+      "libraries": "https://www.spl.org/",
+      "parks_and_recreation": "https://www.seattle.gov/parks",
+      "emergency_management": "https://www.seattle.gov/emergency-management",
+      "trash": "https://www.seattle.gov/utilities/your-services/collection"
+  },
+  "services": {
+      "behavioral_health": {
+          "allowed": true,
+          "authority": "city_department",
+          "resources": [
+              {
+                  "name": "Seattle Human Services Department (HSD)",
+                  "link": "https://www.seattle.gov/human-services",
+                  "phone": "206-684-0500",
+                  "notes": "HSD coordinates city behavioral health and homelessness services. Penny should use this as the primary referral point for non-emergency help."
+              },
+              {
+                  "name": "King County Crisis Connections",
+                  "link": "https://www.crisisconnections.org/",
+                  "phone": "866-427-4747",
+                  "notes": "24/7 county-wide crisis line for mental health and substance abuse issues. Essential for immediate, non-911 crises."
+              }
+          ]
+      },
+      "sexual_health": {
+          "allowed": true,
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Public Health – Seattle & King County (Sexual Health Clinic)",
+                  "link": "https://kingcounty.gov/depts/health/sexual-health.aspx",
+                  "phone": "206-477-8000",
+                  "notes": "Official county authority providing confidential STD/HIV testing, treatment, and prevention services in the Seattle area."
+              }
+          ]
+      },
+      "warming_and_cooling_centers": {
+          "allowed": true,
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Seattle Community Centers",
+                  "address": "Varies by activation",
+                  "season": "winter/summer",
+                  "link": "https://www.seattle.gov/emergency-management/prepare/stay-safe/extreme-heat-and-cold",
+                  "notes": "The City activates various libraries and community centers as warming shelters during extreme cold and cooling centers during extreme heat. Penny must advise residents to check the link for the official activation status."
+              }
+          ]
+      },
+      "trash_and_recycling": {
+          "authority": "city",
+          "pickup_days": "Varies by address. Schedules and recycling rules are managed by Seattle Public Utilities (SPU).",
+          "holiday_schedule_link": "https://www.seattle.gov/utilities/your-services/collection/holiday-schedule"
+      },
+      "transit": {
+          "authority": "county",
+          "provider": "King County Metro",
+          "routes_link": "https://kingcounty.gov/depts/transportation/metro/schedules-routes.aspx",
+          "planner_link": "https://kingcounty.gov/depts/transportation/metro/travel-options.aspx"
+      },
+      "emergency": {
+          "authority": "city",
+          "alerts_link": "https://www.seattle.gov/emergency-management/alert-seattle",
+          "non_emergency_phone": "206-625-5011 (Police Non Emergency)",
+          "emergency_management_link": "https://www.seattle.gov/emergency-management"
+      },
+      "libraries": {
+          "authority": "city",
+          "resources": [
+              {
+                  "branch": "The Seattle Public Library – Central Library",
+                  "address": "1000 4th Ave, Seattle, WA 98104",
+                  "link": "https://www.spl.org/",
+                  "notes": "The flagship library offering extensive resources, free computer access, and a safe, public space."
+              }
+          ]
+      },
+      "community_centers": {
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Magnuson Park Community Center",
+                  "address": "7110 62nd Ave NE, Seattle, WA 98115",
+                  "link": "https://www.seattle.gov/parks/allparks/magnuson-park",
+                  "notes": "A large community hub offering diverse recreational programming, classes, and facilities."
+              }
+          ]
+      }
+  }
+}

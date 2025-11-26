@@ -1,0 +1,65 @@
+{
+    "tenant_id": "providence_ri",
+    "source": "https://www.downtownprovidence.com/event-calendar/",
+    "notes": "This calendar includes events hosted in the Downtown Providence district such as arts festivals, concerts, markets, and holiday events. All event times are in ISO 8601 UTC format.",
+    "event_categories": [
+        "arts_and_entertainment",
+        "holiday_celebrations_outdoor",
+        "markets_and_fairs_outdoor",
+        "community_events"
+    ],
+    "how_to_access": {
+        "general": "Users can visit the event site to explore upcoming downtown events. Penny provides personalized recaps.",
+        "calendar_link": "https://www.downtownprovidence.com/event-calendar/"
+    },
+    "events": [
+        {
+            "event_id": "PVD_HOLI_1214",
+            "name": "Holiday Lights Market",
+            "description": "A festive evening with artisan vendors, food trucks, and holiday lights in the heart of Providence. Primarily an outdoor event.",
+            "start_time": "2025-12-14T16:00:00Z",
+            "end_time": "2025-12-14T21:00:00Z",
+            "location": {
+                "name": "Burnside Park",
+                "address": "Kennedy Plaza, Providence, RI 02903",
+                "latitude": 41.8252,
+                "longitude": -71.4116
+            },
+            "category": "holiday_celebrations_outdoor",
+            "url": "https://www.downtownprovidence.com/event-calendar/",
+            "is_paid": false
+        },
+        {
+            "event_id": "PVD_COMM_1222",
+            "name": "Skate in the Park",
+            "description": "Outdoor ice skating open to all ages. Rentals available on-site. Hot cocoa included! Event is weather dependent.",
+            "start_time": "2025-12-22T10:00:00Z",
+            "end_time": "2025-12-22T22:00:00Z",
+            "location": {
+                "name": "Alex and Ani City Center (Outdoor Rink)",
+                "address": "2 Kennedy Plaza, Providence, RI 02903",
+                "latitude": 41.8252,
+                "longitude": -71.4095
+            },
+            "category": "community_events",
+            "url": "https://www.downtownprovidence.com/event-calendar/",
+            "is_paid": true
+        },
+        {
+            "event_id": "PVD_MARKET_0111",
+            "name": "Downtown Makers Market",
+            "description": "Support local artists and small businesses at this monthly pop-up market in the city center. Held in temporary indoor/tented structures.",
+            "start_time": "2026-01-11T11:00:00Z",
+            "end_time": "2026-01-11T16:00:00Z",
+            "location": {
+                "name": "Fulton Street",
+                "address": "15 Fulton St, Providence, RI 02903",
+                "latitude": 41.8247,
+                "longitude": -71.4099
+            },
+            "category": "markets_and_fairs_outdoor",
+            "url": "https://www.downtownprovidence.com/event-calendar/",
+            "is_paid": false
+        }
+    ]
+}

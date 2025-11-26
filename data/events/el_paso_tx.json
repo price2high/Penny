@@ -1,0 +1,125 @@
+{
+    "tenant_id": "el_paso_tx",
+    "city_name": "El Paso",
+    "state": "TX",
+    "timezone": "America/Denver",
+    "source": "https://events.elpasotexas.gov/",
+    "last_updated": "2025-01-15T00:00:00Z",
+    "data_version": "1.0",
+    "notes": "Official El Paso civic events cache. Includes city-sponsored community events, museum exhibitions, holiday celebrations, and cultural programming. All times in ISO 8601 UTC format. Remove past events during monthly maintenance.",
+    "event_categories": [
+        "public_festivals_outdoor",
+        "cultural_events",
+        "holiday_celebrations_outdoor",
+        "museum_exhibits_indoor",
+        "recreation_programs"
+    ],
+    "how_to_access": {
+        "general": "Residents can visit the city's event portal to browse upcoming events. Penny summarizes and filters highlights by interest or date.",
+        "calendar_link": "https://events.elpasotexas.gov/"
+    },
+    "events": [
+        {
+            "event_id": "ELP_HOLI_1207",
+            "name": "WinterFest in Downtown El Paso",
+            "description": "Enjoy a festive winter wonderland with holiday lights, music, ice skating at Convention Center Plaza, and food trucks. Primarily an outdoor celebration in the heart of downtown.",
+            "start_time": "2025-12-07T17:00:00Z",
+            "end_time": "2025-12-07T23:00:00Z",
+            "location": {
+                "name": "San Jacinto Plaza",
+                "address": "111 W Mills Ave, El Paso, TX 79901",
+                "city": "El Paso",
+                "state": "TX",
+                "zip_code": "79901",
+                "latitude": 31.7597,
+                "longitude": -106.4886
+            },
+            "category": "holiday_celebrations_outdoor",
+            "tags": ["winter", "holiday", "festival", "ice_skating", "outdoor", "family_friendly", "free", "downtown", "lights", "food_trucks"],
+            "url": "https://www.epwinterfest.com/",
+            "is_paid": false,
+            "is_recurring": true,
+            "recurrence_pattern": "annual_december",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "events@elpasotexas.gov",
+                "phone": "915-212-0092"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false,
+            "special_notes": "Ice skating available at nearby Convention Center Plaza. Dress warmly for evening temperatures."
+        },
+        {
+            "event_id": "ELP_FEST_0118",
+            "name": "Sun City Craft Beer Festival",
+            "description": "Sample beers from over 50 local and national breweries, with live music and food vendors. Held mostly outdoors on the plaza. Must be 21+ to enter.",
+            "start_time": "2026-01-18T13:00:00Z",
+            "end_time": "2026-01-18T19:00:00Z",
+            "location": {
+                "name": "Convention Center Plaza",
+                "address": "1 Civic Center Plaza, El Paso, TX 79901",
+                "city": "El Paso",
+                "state": "TX",
+                "zip_code": "79901",
+                "latitude": 31.7575,
+                "longitude": -106.4947
+            },
+            "category": "cultural_events",
+            "tags": ["beer_festival", "craft_beer", "outdoor", "live_music", "food_vendors", "adults_only", "downtown"],
+            "url": "https://events.elpasotexas.gov/",
+            "is_paid": true,
+            "is_recurring": true,
+            "recurrence_pattern": "annual_january",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "events@elpasotexas.gov",
+                "phone": "915-212-0092"
+            },
+            "age_restriction": "21_plus",
+            "registration_required": true,
+            "special_notes": "Valid ID required for entry. Purchase tickets in advance for best pricing."
+        },
+        {
+            "event_id": "ELP_CULT_0209",
+            "name": "Chamizal National Memorial Cultural Celebration",
+            "description": "A celebration of El Paso's rich multicultural roots with traditional dance, live music, and artisan markets. Held at the historic Memorial grounds.",
+            "start_time": "2026-02-09T10:00:00Z",
+            "end_time": "2026-02-09T16:00:00Z",
+            "location": {
+                "name": "Chamizal National Memorial",
+                "address": "800 S San Marcial St, El Paso, TX 79905",
+                "city": "El Paso",
+                "state": "TX",
+                "zip_code": "79905",
+                "latitude": 31.7677,
+                "longitude": -106.4580
+            },
+            "category": "public_festivals_outdoor",
+            "tags": ["cultural", "multicultural", "dance", "music", "artisan_market", "outdoor", "family_friendly", "free", "national_memorial", "heritage"],
+            "url": "https://www.nps.gov/cham/",
+            "is_paid": false,
+            "is_recurring": true,
+            "recurrence_pattern": "annual_february",
+            "accessibility": {
+                "wheelchair_accessible": true,
+                "public_transit_accessible": true,
+                "parking_available": true
+            },
+            "contact": {
+                "email": "cham_interpretation@nps.gov",
+                "phone": "915-532-7273"
+            },
+            "age_restriction": "all_ages",
+            "registration_required": false,
+            "special_notes": "Celebrates El Paso's border heritage and the Chamizal Treaty. National Park Service event."
+        }
+    ]
+}

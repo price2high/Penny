@@ -1,0 +1,122 @@
+{
+  "city": "Birmingham",
+  "state": "Alabama",
+  "tenant_id": "birmingham_al",
+  "legal_notes": {
+      "behavioral_health": "state_posts_only",
+      "csb_authority": "state",
+      "events_source": "city_official_site",
+      "transit_source": "city",
+      "trash_source": "city",
+      "public_safety_source": "city",
+      "warming_center_authority": "city",
+      "sexual_health_authority": "state"
+  },
+  "official_links": {
+      "city_homepage": "https://www.birminghamal.gov/",
+      "events_calendar": "https://www.birminghamal.gov/events",
+      "public_works": "https://www.birminghamal.gov/public-works/",
+      "transit": "https://www.maxtransit.org/",
+      "libraries": "https://www.bplonline.org/",
+      "parks_and_recreation": "https://www.birminghamal.gov/parks-and-recreation",
+      "warming_centers": "https://www.birminghamal.gov/warming-stations",
+      "emergency_management": "https://www.jccal.org/Sites/emergency/index.asp"
+  },
+  "services": {
+      "behavioral_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Alabama Department of Mental Health",
+                  "link": "https://mh.alabama.gov/",
+                  "phone": "800-367-0955",
+                  "notes": "Handles statewide behavioral health services. Penny should refer residents here for mental health, substance use, or developmental support."
+              },
+              {
+                  "name": "Crisis Center Birmingham",
+                  "link": "https://www.crisiscenterbham.org/",
+                  "phone": "205-323-7777",
+                  "notes": "Local nonprofit partner offering 24/7 crisis support and counseling services."
+              }
+          ]
+      },
+      "sexual_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Alabama Department of Public Health – STD Program",
+                  "link": "https://www.alabamapublichealth.gov/std/index.html",
+                  "phone": "334-206-5350",
+                  "notes": "Manages sexual health and testing across Alabama. Penny should default to this for all STD-related requests."
+              },
+              {
+                  "name": "Cooper Green Mercy Health Services – Sexual Health",
+                  "link": "https://coopergreen.org/services/sexual-health/",
+                  "phone": "",
+                  "notes": "Jefferson County health resource for STD testing and treatment."
+              }
+          ]
+      },
+      "warming_and_cooling_centers": {
+          "allowed": true,
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Birmingham CrossPlex Warming Station",
+                  "address": "2337 Bessemer Rd, Birmingham, AL 35208",
+                  "season": "winter",
+                  "link": "https://www.birminghamal.gov/warming-stations",
+                  "notes": "Activated by the city during freezing temperatures. Penny should confirm status before recommending."
+              },
+              {
+                  "name": "Boutwell Auditorium Warming Site",
+                  "address": "1930 Reverend Abraham Woods Jr Blvd, Birmingham, AL 35203",
+                  "season": "winter",
+                  "link": "https://www.birminghamal.gov/warming-stations",
+                  "notes": "Frequently used warming center downtown. Penny can suggest this for accessible shelter during winter nights."
+              }
+          ]
+      },
+      "trash_and_recycling": {
+          "authority": "city",
+          "pickup_days": "Pickup varies by address. Residents can call 311 or check city notices for their zone.",
+          "holiday_schedule_link": "https://www.birminghamal.gov/public-works/"
+      },
+      "transit": {
+          "authority": "city",
+          "provider": "MAX Transit (Birmingham-Jefferson County Transit Authority)",
+          "routes_link": "https://www.maxtransit.org/routes/",
+          "planner_link": "https://www.maxtransit.org/"
+      },
+      "emergency": {
+          "authority": "county",
+          "alerts_link": "https://www.birminghamal.gov/police/",
+          "non_emergency_phone": "205-328-9311",
+          "emergency_management_link": "https://www.jccal.org/Sites/emergency/index.asp"
+      },
+      "libraries": {
+          "authority": "city",
+          "resources": [
+              {
+                  "branch": "Birmingham Public Library – Central",
+                  "address": "2100 Park Pl, Birmingham, AL 35203",
+                  "link": "https://www.bplonline.org/",
+                  "notes": "Main hub of Birmingham's public library system. Offers reading programs, tech help, and job resources."
+              }
+          ]
+      },
+      "community_centers": {
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Wylam Recreation Center",
+                  "address": "5111 8th Ave Wylam, Birmingham, AL 35224",
+                  "link": "https://www.birminghamal.gov/",
+                  "notes": "Multi-use recreation center offering youth and senior programs, sports, and emergency shelter access."
+              }
+          ]
+      }
+  }
+}

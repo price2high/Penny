@@ -1,0 +1,140 @@
+{
+  "city": "Atlanta",
+  "state": "Georgia",
+  "tenant_id": "atlanta_ga",
+  "legal_notes": {
+      "behavioral_health": "state_posts_only",
+      "csb_authority": "state",
+      "events_source": "city_official_site",
+      "transit_source": "city",
+      "trash_source": "city",
+      "public_safety_source": "city",
+      "warming_center_authority": "city",
+      "sexual_health_authority": "state"
+  },
+  "official_links": {
+      "city_homepage": "https://www.atlantaga.gov/",
+      "events_calendar": "https://www.atlantaga.gov/i-want-to-/advanced-components/event-list-view",
+      "public_works": "https://www.atlantaga.gov/government/departments/public-works/office-of-solid-waste-services",
+      "transit": "https://itsmarta.com/",
+      "libraries": "https://www.fulcolibrary.org/",
+      "parks_and_recreation": "https://www.atlantaga.gov/government/departments/parks-recreation",
+      "warming_centers": "https://www.atlantaga.gov/Home/Components/News/News/15568/672",
+      "emergency_management": "https://www.fultoncountyga.gov/inside-fulton-county/fulton-county-departments/atlanta-fulton-emergency-management-agency"
+  },
+  "services": {
+      "behavioral_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Georgia Crisis and Access Line (GCAL)",
+                  "link": "https://dbhdd.georgia.gov/be-dbhdd",
+                  "phone": "800-715-4225",
+                  "notes": "24/7 statewide line for mental health, substance use, and developmental disability crises. Penny should gently steer people here if they mention a crisis."
+              },
+              {
+                  "name": "Find a Community Service Board (CSB)",
+                  "link": "https://dbhdd.georgia.gov/locations/community-service-board",
+                  "phone": "",
+                  "notes": "State-managed directory of Community Service Boards across Georgia. Use this instead of naming local CSBs manually."
+              }
+          ]
+      },
+      "sexual_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Georgia Department of Public Health – STD Program",
+                  "link": "https://dph.georgia.gov/STDs",
+                  "phone": "404-657-2700",
+                  "notes": "State program that supports STD testing and treatment across all 159 Georgia counties."
+              },
+              {
+                  "name": "Fulton County Board of Health – Sexual Health Clinics",
+                  "link": "https://fultoncountyboh.com/services/adult-health/sexual-health/",
+                  "phone": "",
+                  "notes": "County-run sexual health clinics serving Atlanta/Fulton residents with STI testing and treatment."
+              },
+              {
+                  "name": "AID Atlanta – HIV & STI Testing",
+                  "link": "https://www.aidatlanta.org/testing/",
+                  "phone": "",
+                  "notes": "Nonprofit HIV/STI testing and support. Penny can mention this as an additional community resource."
+              }
+          ]
+      },
+      "warming_and_cooling_centers": {
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Gateway Center – Warming Center",
+                  "address": "275 Pryor St SW, Atlanta, GA 30303",
+                  "season": "winter",
+                  "link": "https://partnersforhome.org/atlwarmup-resources/",
+                  "notes": "Frequently used as a winter warming center for people experiencing homelessness. Penny should remind users to check current activation status or call ahead."
+              },
+              {
+                  "name": "Central Park Recreation Center",
+                  "address": "400 Merritts Ave NE, Atlanta, GA 30308",
+                  "season": "winter",
+                  "link": "https://www.atlantaga.gov/Home/Components/News/News/15568/672",
+                  "notes": "City recreation center that opens as a temporary warming center during cold-weather activations."
+              },
+              {
+                  "name": "Old Adamsville Recreation Center",
+                  "address": "3404 Delmar Ln NW, Atlanta, GA 30331",
+                  "season": "winter",
+                  "link": "https://www.atlantaga.gov/Home/Components/News/News/15568/672",
+                  "notes": "Another recreation center the City uses as a temporary warming center when severe cold is forecast."
+              }
+          ]
+      },
+      "trash_and_recycling": {
+          "authority": "city",
+          "pickup_days": "Varies by address. Residents should use the Solid Waste Services Collection Tool or ATL311 app to see their specific schedule.",
+          "holiday_schedule_link": "https://www.atlantaga.gov/government/departments/public-works/solid-waste-services-collection-tool"
+      },
+      "transit": {
+          "authority": "city",
+          "provider": "MARTA (Metropolitan Atlanta Rapid Transit Authority)",
+          "routes_link": "https://itsmarta.com/",
+          "planner_link": "https://discoveratlanta.com/explore/transportation/marta-guide/"
+      },
+      "emergency": {
+          "authority": "county",
+          "alerts_link": "https://www.atlantaga.gov/government/mayor-s-office/executive-offices/office-of-emergency-preparedness/be-ready",
+          "non_emergency_phone": "404-546-0311",
+          "emergency_management_link": "https://www.fultoncountyga.gov/inside-fulton-county/fulton-county-departments/atlanta-fulton-emergency-management-agency"
+      },
+      "libraries": {
+          "authority": "county",
+          "resources": [
+              {
+                  "branch": "Fulton County Library System – Central Library",
+                  "address": "1 Margaret Mitchell Sq, Atlanta, GA 30303",
+                  "link": "https://www.fulcolibrary.org/",
+                  "notes": "Main hub of the public library system serving Atlanta and Fulton County. Great place for computer access, study space, and community programs."
+              }
+          ]
+      },
+      "community_centers": {
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Central Park Recreation Center",
+                  "address": "400 Merritts Ave NE, Atlanta, GA 30308",
+                  "link": "https://www.atlantaga.gov/",
+                  "notes": "Recreation center with community programming; also used as a warming center during extreme cold."
+              },
+              {
+                  "name": "Old Adamsville Recreation Center",
+                  "address": "3404 Delmar Ln NW, Atlanta, GA 30331",
+                  "link": "https://www.atlantaga.gov/",
+                  "notes": "Neighborhood recreation center that the City activates as a warming center when needed."
+              }
+          ]
+      }
+  }
+}

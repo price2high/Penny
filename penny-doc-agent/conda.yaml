@@ -1,0 +1,48 @@
+# Penny Document Agent - Azure ML Environment Configuration
+# Production-grade conda environment for PDF extraction and document understanding
+# Deployed as part of Penny's civic engagement AI platform
+
+name: penny-doc-agent-env
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10.12
+  - pip=23.3.1
+
+  - pip:
+      # Core ML Framework
+      - torch==2.1.0
+      - torchvision==0.16.0
+      - transformers==4.35.2
+      
+      # Azure ML Integration
+      - azureml-defaults==1.55.0
+      - azureml-inference-server-http==0.8.6
+      
+      # Document Processing
+      - pytesseract==0.3.10
+      - pdf2image==1.16.3
+      - PyPDF2==3.0.1
+      - pdfplumber==0.10.3
+      - Pillow==10.1.0
+      
+      # Layout Understanding (LayoutLM)
+      - detectron2==0.6
+      
+      # Model Dependencies
+      - numpy==1.24.3
+      - scipy==1.11.4
+      - scikit-learn==1.3.2
+      
+      # Performance & Optimization
+      - accelerate==0.25.0
+      
+      # Utilities
+      - requests==2.31.0
+      - pyyaml==6.0.1
+      
+      # Logging & Monitoring
+      - python-json-logger==2.0.7

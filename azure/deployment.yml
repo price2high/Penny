@@ -1,0 +1,51 @@
+# Azure ML Deployment Configuration for PENNY Main Application
+# Defines deployment settings for Penny's main FastAPI application
+
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+
+name: penny-main-deployment
+endpoint_name: penny-main-endpoint
+
+model:
+  path: .
+  name: penny-main-model
+  version: 1
+
+code_configuration:
+  code: .
+  scoring_script: azure/score.py
+
+environment:
+  name: penny-azure-env
+  version: 1
+  conda_file: azure/env.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04:latest
+
+instance_type: Standard_DS4_v2
+instance_count: 1
+
+request_settings:
+  request_timeout_ms: 30000
+  max_concurrent_requests_per_instance: 8
+  max_queue_wait_ms: 15000
+
+liveness_route:
+  path: /health
+  port: 8000
+
+readiness_route:
+  path: /health
+  port: 8000
+
+scoring_route:
+  path: /score
+  port: 8000
+
+deployment_settings:
+  min_instances: 1
+  max_instances: 4
+  scale_settings:
+    scale_type: manual
+
+app_insights_enabled: true
+

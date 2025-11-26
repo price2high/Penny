@@ -1,0 +1,115 @@
+{
+  "city": "El Paso",
+  "state": "Texas",
+  "tenant_id": "el_paso_tx",
+  "legal_notes": {
+      "behavioral_health": "state_only",
+      "csb_authority": "none",
+      "events_source": "city_official_site",
+      "transit_source": "city",
+      "trash_source": "city",
+      "public_safety_source": "city",
+      "warming_center_authority": "city",
+      "sexual_health_authority": "state"
+  },
+  "official_links": {
+      "city_homepage": "https://www.elpasotexas.gov/",
+      "events_calendar": "https://events.elpasotexas.gov/",
+      "public_health": "https://www.elpasotexas.gov/public-health/",
+      "transit": "https://sunmetro.net/",
+      "libraries": "https://www.elpasolibrary.org/",
+      "parks_and_recreation": "https://www.elpasotexas.gov/parks-and-recreation/",
+      "emergency_management": "https://www.elpasotexas.gov/fire-department/emergency-management/",
+      "trash": "https://www.elpasotexas.gov/environmental-services/"
+  },
+  "services": {
+      "behavioral_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "Texas Health and Human Services (Crisis Hotline)",
+                  "link": "https://www.hhs.texas.gov/services/mental-health-substance-use",
+                  "phone": "800-273-8255 (National Suicide Prevention Lifeline)",
+                  "notes": "Since El Paso does not rely on a local CSB, Penny should prioritize state and national resources for mental health and substance abuse crises."
+              },
+              {
+                  "name": "Emergence Health Network (Local Mental Health Authority)",
+                  "link": "https://www.ehn.org/",
+                  "phone": "915-884-8884",
+                  "notes": "The Local Mental Health Authority for El Paso County, providing emergency services and outpatient care."
+              }
+          ]
+      },
+      "sexual_health": {
+          "allowed": true,
+          "authority": "state",
+          "resources": [
+              {
+                  "name": "City of El Paso Department of Public Health – HIV/STD",
+                  "link": "https://www.elpasotexas.gov/public-health/sexual-health",
+                  "phone": "915-212-6600",
+                  "notes": "Local city department offering confidential testing, treatment, and prevention services."
+              },
+              {
+                  "name": "Texas Department of State Health Services (DSHS)",
+                  "link": "https://www.dshs.texas.gov/hivstd/testing",
+                  "phone": "",
+                  "notes": "State authority for broader sexual health policies and resources."
+              }
+          ]
+      },
+      "warming_and_cooling_centers": {
+          "allowed": true,
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "City of El Paso Recreation Centers",
+                  "address": "Varies by activation",
+                  "season": "winter/summer",
+                  "link": "https://www.elpasotexas.gov/parks-and-recreation/",
+                  "notes": "City recreation centers are typically used as temporary cooling centers during extreme heat and warming centers during extreme cold. Penny must remind users to check for current activation alerts."
+              }
+          ]
+      },
+      "trash_and_recycling": {
+          "authority": "city",
+          "pickup_days": "Varies by zone. Residents can use the city's Environmental Services website for schedules and holiday changes.",
+          "holiday_schedule_link": "https://www.elpasotexas.gov/environmental-services/about-us/news"
+      },
+      "transit": {
+          "authority": "city",
+          "provider": "Sun Metro",
+          "routes_link": "https://sunmetro.net/routes/maps-schedules/",
+          "planner_link": "https://sunmetro.net/"
+      },
+      "emergency": {
+          "authority": "city",
+          "alerts_link": "https://www.elpasotexas.gov/fire-department/emergency-management/alerts",
+          "non_emergency_phone": "915-832-4400 (Police Department Non Emergency)",
+          "emergency_management_link": "https://www.elpasotexas.gov/fire-department/emergency-management/"
+      },
+      "libraries": {
+          "authority": "city",
+          "resources": [
+              {
+                  "branch": "El Paso Public Library – Main Branch",
+                  "address": "501 N Oregon St, El Paso, TX 79901",
+                  "link": "https://www.elpasolibrary.org/",
+                  "notes": "The main public library, often a hub for public access internet, job search assistance, and community programs."
+              }
+          ]
+      },
+      "community_centers": {
+          "authority": "city",
+          "resources": [
+              {
+                  "name": "Leo C. Carter Recreation Center",
+                  "address": "7708 Janway Dr, El Paso, TX 79915",
+                  "link": "https://www.elpasotexas.gov/parks-and-recreation/recreation-centers",
+                  "notes": "One of many city recreation centers providing programs for youth, adults, and seniors."
+              }
+          ]
+      }
+  }
+}
