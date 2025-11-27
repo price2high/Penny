@@ -25,6 +25,9 @@ logger = logging.getLogger(__name__)
 # IMPORT PENNY MODULES - FIXED FOR ACTUAL FILE STRUCTURE
 # ============================================================
 
+# Initialize variables for imports
+_import_error = None
+
 try:
     # Core orchestration - this is the main function we need
     from app.orchestrator import run_orchestrator
@@ -35,24 +38,17 @@ try:
     logger.info("✅ Successfully imported PENNY modules from app/")
     
 except ImportError as e:
+    _import_error = str(e)
     logger.error(f"❌ Failed to import PENNY modules: {e}")
     logger.error(f"   Make sure all files exist in app/ folder")
     logger.error(f"   Current error: {str(e)}")
     
-    # Create fallback functions so the interface can still load
+    # Create fallback function so the interface can still load
     async def run_orchestrator(message: str, context: Dict[str, Any]) -> Dict[str, Any]:
         return {
-            "reply": f"⚠️ PENNY is initializing. Please try again in a moment.\n\nError: {str(e)}",
+            "reply": f"⚠️ PENNY is initializing. Please try again in a moment.\n\nError: {_import_error}",
             "intent": "error",
             "confidence": 0.0
-        }
-    
-    def get_service_availability() -> Dict[str, bool]:
-        return {
-            "orchestrator": False,
-            "weather_service": False,
-            "event_database": False,
-            "resource_finder": False
         }
 
 # ============================================================
@@ -67,8 +63,8 @@ def get_service_availability() -> Dict[str, bool]:
     services = {}
     
     try:
-        # Check if orchestrator is callable
-        services["orchestrator"] = callable(run_orchestrator)
+        # Check if orchestrator is callable and not None
+        services["orchestrator"] = run_orchestrator is not None and callable(run_orchestrator)
     except:
         services["orchestrator"] = False
     
