@@ -41,6 +41,7 @@ RUN mkdir -p /code/logs /code/data /code/models && \
     chown -R pennyuser:pennyuser /code
 
 # Copy application code (exclude .env - use Azure Key Vault instead)
+COPY --chown=pennyuser:pennyuser app.py ./
 COPY --chown=pennyuser:pennyuser app/ ./app/
 COPY --chown=pennyuser:pennyuser models/ ./models/
 COPY --chown=pennyuser:pennyuser data/ ./data/

@@ -1,3 +1,15 @@
+---
+title: PENNY - Civic Engagement AI Assistant
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: docker
+sdk_version: latest
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # 🤖 PENNY - Civic Engagement AI Assistant
 
 **Personal civic Engagement Nurturing Network sYstem**
