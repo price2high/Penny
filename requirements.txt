@@ -87,6 +87,11 @@ cryptography==42.0.5
 # mypy==1.9.0
 
 # ============================================
+# Gradio UI Framework (Hugging Face Spaces)
+# ============================================
+gradio==4.44.0
+
+# ============================================
 # Production Server Optimization
 # ============================================
 gunicorn==21.2.0  # Alternative to uvicorn for production

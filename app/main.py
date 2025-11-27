@@ -265,6 +265,30 @@ try:
 except Exception as e:
     logger.error(f"❌ Failed to register API router: {e}", exc_info=True)
 
+# --- ADD /chat ENDPOINT AT ROOT LEVEL FOR FRONTEND COMPATIBILITY ---
+# Frontend expects /chat but router has /api/chat prefix
+# This provides both /chat and /api/chat for compatibility
+from app.router import route_request
+
+@app.post("/chat", tags=["Penny API"])
+async def chat_endpoint_root(payload: Dict[str, Any]) -> JSONResponse:
+    """
+    💬 Main chat endpoint at root level for frontend compatibility.
+    This is an alias to /api/chat for easier frontend integration.
+    """
+    try:
+        result = route_request(payload)
+        return JSONResponse(status_code=200, content=result)
+    except Exception as e:
+        logger.error(f"Error in chat endpoint: {e}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": "I'm having trouble processing that right now. Please try again! 💛",
+                "detail": str(e) if os.getenv("DEBUG_MODE", "false").lower() == "true" else None
+            }
+        )
+
 # ============================================================
 # CORE HEALTH & STATUS ENDPOINTS
 # ============================================================
