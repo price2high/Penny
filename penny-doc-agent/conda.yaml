@@ -18,10 +18,6 @@ dependencies:
       - torchvision==0.16.0
       - transformers==4.35.2
       
-      # Azure ML Integration
-      - azureml-defaults==1.55.0
-      - azureml-inference-server-http==0.8.6
-      
       # Document Processing
       - pytesseract==0.3.10
       - pdf2image==1.16.3

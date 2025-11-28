@@ -17,10 +17,6 @@ dependencies:
       - torch==2.1.0
       - transformers==4.35.2
       
-      # Azure ML Integration
-      - azureml-defaults==1.55.0
-      - azureml-inference-server-http==0.8.6
-      
       # Model Dependencies
       - numpy==1.24.3
       - scipy==1.11.4

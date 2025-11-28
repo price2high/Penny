@@ -30,16 +30,22 @@ app/
 ### Model Utilities
 ```
 models/
+├── __init__.py                 # Models package initialization
 ├── model_config.json           # Model configuration (REQUIRED)
 ├── translation/
+│   ├── __init__.py
 │   └── translation_utils.py
 ├── sentiment/
+│   ├── __init__.py
 │   └── sentiment_utils.py
 ├── bias/
+│   ├── __init__.py
 │   └── bias_utils.py
 ├── gemma/
+│   ├── __init__.py
 │   └── gemma_utils.py
 └── layoutlm/
+    ├── __init__.py
     └── layoutlm_utils.py
 ```
 
@@ -221,8 +227,7 @@ your-space/
 1. **`models/model_config.json` is REQUIRED** - The app will fail to start without it
 2. **Data files are REQUIRED** - The location system needs city data to function
 3. **Do NOT upload `.env` files** - Use HF Spaces environment variables instead
-4. **Create `app/__init__.py`** if it doesn't exist (can be empty file)
-5. **Create `models/__init__.py`** if it doesn't exist (can be empty file)
+4. **`__init__.py` files are included** - All necessary package initialization files are present in `app/` and `models/` directories
 
 ## 🔍 Verification
 

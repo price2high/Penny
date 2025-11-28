@@ -3,9 +3,9 @@ title: PENNY - Civic Engagement AI Assistant
 emoji: 🤖
 colorFrom: blue
 colorTo: purple
-sdk: gradio
-sdk_version: 4.44.0
-app_file: gradio_app.py
+sdk: docker
+sdk_version: latest
+app_file: app.py
 pinned: false
 license: mit
 ---
@@ -23,7 +23,7 @@ license: mit
 
 ## 📋 Overview
 
-**PENNY** is a production-grade, AI-powered civic engagement assistant designed to help citizens connect with local government services, community events, and civic resources. Built with Azure ML and FastAPI, Penny provides warm, helpful, and contextually-aware assistance for civic participation.
+**PENNY** is a production-grade, AI-powered civic engagement assistant designed to help citizens connect with local government services, community events, and civic resources. Built with FastAPI and Hugging Face Transformers, Penny provides warm, helpful, and contextually-aware assistance for civic participation.
 
 ### ✨ Key Features
 
