@@ -8,22 +8,18 @@ Uses a classification model to identify neutral content vs. biased language patt
 """
 
 import asyncio
+import os
+import httpx
 from typing import Dict, Any, Optional, List
 import logging
 
 # --- Logging Setup ---
 logger = logging.getLogger(__name__)
 
-# --- Model Loader Import ---
-try:
-    from app.model_loader import load_model_pipeline
-    MODEL_LOADER_AVAILABLE = True
-except ImportError:
-    MODEL_LOADER_AVAILABLE = False
-    logger.warning("Could not import load_model_pipeline. Bias detection will operate in fallback mode.")
+# --- Hugging Face API Configuration ---
+HF_API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
+HF_TOKEN = os.getenv("HF_TOKEN")
 
-# Global variable to store the loaded pipeline for re-use
-BIAS_PIPELINE: Optional[Any] = None
 AGENT_NAME = "penny-bias-checker"
 
 # Define the labels for Zero-Shot Classification.
@@ -35,35 +31,14 @@ CANDIDATE_LABELS = [
 ]
 
 
-def _initialize_bias_pipeline() -> bool:
+def _is_bias_available() -> bool:
     """
-    Initializes the bias detection pipeline only once.
+    Check if bias detection service is available.
     
     Returns:
-        bool: True if pipeline loaded successfully, False otherwise
+        bool: True if HF_TOKEN is configured
     """
-    global BIAS_PIPELINE
-    
-    if BIAS_PIPELINE is not None:
-        return True
-    
-    if not MODEL_LOADER_AVAILABLE:
-        logger.warning(f"{AGENT_NAME}: Model loader not available, pipeline initialization skipped")
-        return False
-    
-    try:
-        logger.info(f"Loading {AGENT_NAME}...")
-        BIAS_PIPELINE = load_model_pipeline(AGENT_NAME)
-        logger.info(f"Model {AGENT_NAME} loaded successfully")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to load {AGENT_NAME}: {e}", exc_info=True)
-        BIAS_PIPELINE = None
-        return False
-
-
-# Attempt to initialize pipeline at module load
-_initialize_bias_pipeline()
+    return HF_TOKEN is not None and len(HF_TOKEN) > 0
 
 
 async def check_bias(text: str) -> Dict[str, Any]:
@@ -90,7 +65,6 @@ async def check_bias(text: str) -> Dict[str, Any]:
         >>> result['analysis'][0]['label']
         'neutral and objective'
     """
-    global BIAS_PIPELINE
     
     # Input validation
     if not text or not isinstance(text, str):
@@ -111,28 +85,39 @@ async def check_bias(text: str) -> Dict[str, Any]:
             "message": "Invalid input: text is empty"
         }
     
-    # Ensure pipeline is initialized
-    if BIAS_PIPELINE is None:
-        logger.warning(f"{AGENT_NAME} pipeline not available, attempting re-initialization")
-        if not _initialize_bias_pipeline():
-            return {
-                "analysis": [],
-                "available": False,
-                "message": "Bias detection service is currently unavailable"
-            }
+    # Check API availability
+    if not _is_bias_available():
+        logger.warning(f"{AGENT_NAME}: API not configured (missing HF_TOKEN)")
+        return {
+            "analysis": [],
+            "available": False,
+            "message": "Bias detection service is currently unavailable"
+        }
     
     try:
-        loop = asyncio.get_event_loop()
+        # Prepare API request for zero-shot classification
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+        payload = {
+            "inputs": text,
+            "parameters": {
+                "candidate_labels": CANDIDATE_LABELS,
+                "multi_label": True
+            }
+        }
         
-        # Run inference in thread pool to avoid blocking
-        results = await loop.run_in_executor(
-            None,
-            lambda: BIAS_PIPELINE(
-                text,
-                CANDIDATE_LABELS,
-                multi_label=True
-            )
-        )
+        # Call Hugging Face Inference API
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(HF_API_URL, json=payload, headers=headers)
+            
+            if response.status_code != 200:
+                logger.error(f"Bias detection API returned status {response.status_code}")
+                return {
+                    "analysis": [],
+                    "available": False,
+                    "message": f"Bias detection API error: {response.status_code}"
+                }
+            
+            results = response.json()
         
         # Validate results structure
         if not results or not isinstance(results, dict):
@@ -170,6 +155,14 @@ async def check_bias(text: str) -> Dict[str, Any]:
             "available": True
         }
     
+    except httpx.TimeoutException:
+        logger.error("Bias detection request timed out")
+        return {
+            "analysis": [],
+            "available": False,
+            "message": "Bias detection request timed out"
+        }
+    
     except asyncio.CancelledError:
         logger.warning("Bias detection task was cancelled")
         raise
@@ -192,6 +185,6 @@ def get_bias_pipeline_status() -> Dict[str, Any]:
     """
     return {
         "agent_name": AGENT_NAME,
-        "available": BIAS_PIPELINE is not None,
-        "model_loader_available": MODEL_LOADER_AVAILABLE
+        "available": _is_bias_available(),
+        "api_configured": HF_TOKEN is not None
     }

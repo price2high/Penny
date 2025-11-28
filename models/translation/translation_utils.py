@@ -8,24 +8,19 @@ Provides async translation with structured error handling and language code norm
 
 import asyncio
 import time
+import os
+import httpx
 from typing import Dict, Any, Optional, List
 
 # --- Logging Imports ---
 from app.logging_utils import log_interaction, sanitize_for_logging
 
-# --- Model Loader Import ---
-try:
-    from app.model_loader import load_model_pipeline
-    MODEL_LOADER_AVAILABLE = True
-except ImportError:
-    MODEL_LOADER_AVAILABLE = False
-    import logging
-    logging.getLogger(__name__).warning("Could not import load_model_pipeline. Translation service unavailable.")
+# --- Hugging Face API Configuration ---
+HF_API_URL = "https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M"
+HF_TOKEN = os.getenv("HF_TOKEN")
 
-# Global variable to store the loaded pipeline for re-use
-TRANSLATION_PIPELINE: Optional[Any] = None
 AGENT_NAME = "penny-translate-agent"
-INITIALIZATION_ATTEMPTED = False
+SERVICE_AVAILABLE = True  # Assume available since we're using API
 
 # NLLB-200 Language Code Mapping (Common languages for civic engagement)
 LANGUAGE_CODES = {
@@ -104,73 +99,14 @@ CIVIC_PHRASES = {
 }
 
 
-def _initialize_translation_pipeline() -> bool:
-    """
-    Initializes the translation pipeline only once.
-    
-    Returns:
-        bool: True if initialization succeeded, False otherwise.
-    """
-    global TRANSLATION_PIPELINE, INITIALIZATION_ATTEMPTED
-    
-    if INITIALIZATION_ATTEMPTED:
-        return TRANSLATION_PIPELINE is not None
-    
-    INITIALIZATION_ATTEMPTED = True
-    
-    if not MODEL_LOADER_AVAILABLE:
-        log_interaction(
-            intent="translation_initialization",
-            success=False,
-            error="model_loader unavailable"
-        )
-        return False
-    
-    try:
-        log_interaction(
-            intent="translation_initialization",
-            success=None,
-            details=f"Loading {AGENT_NAME}"
-        )
-        
-        TRANSLATION_PIPELINE = load_model_pipeline(AGENT_NAME)
-        
-        if TRANSLATION_PIPELINE is None:
-            log_interaction(
-                intent="translation_initialization",
-                success=False,
-                error="Pipeline returned None"
-            )
-            return False
-        
-        log_interaction(
-            intent="translation_initialization",
-            success=True,
-            details=f"Model {AGENT_NAME} loaded successfully"
-        )
-        return True
-        
-    except Exception as e:
-        log_interaction(
-            intent="translation_initialization",
-            success=False,
-            error=str(e)
-        )
-        return False
-
-
-# Attempt initialization at module load
-_initialize_translation_pipeline()
-
-
 def is_translation_available() -> bool:
     """
     Check if translation service is available.
     
     Returns:
-        bool: True if translation pipeline is loaded and ready.
+        bool: True if translation API is configured and ready.
     """
-    return TRANSLATION_PIPELINE is not None
+    return HF_TOKEN is not None and len(HF_TOKEN) > 0
 
 
 def normalize_language_code(lang: str) -> str:
@@ -232,8 +168,6 @@ async def translate_text(
             - response_time_ms (int, optional): Translation time in milliseconds
     """
     start_time = time.time()
-    
-    global TRANSLATION_PIPELINE
 
     # Check availability
     if not is_translation_available():
@@ -241,7 +175,7 @@ async def translate_text(
             intent="translation",
             tenant_id=tenant_id,
             success=False,
-            error="Translation pipeline not available",
+            error="Translation API not configured (missing HF_TOKEN)",
             fallback_used=True
         )
         return {
@@ -310,20 +244,44 @@ async def translate_text(
         }
 
     try:
-        loop = asyncio.get_event_loop()
+        # Prepare API request
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+        payload = {
+            "inputs": text,
+            "parameters": {
+                "src_lang": src_lang,
+                "tgt_lang": tgt_lang
+            }
+        }
         
-        # Run model inference in thread executor
-        # NLLB pipeline expects text and language parameters
-        results = await loop.run_in_executor(
-            None,
-            lambda: TRANSLATION_PIPELINE(
-                text,
-                src_lang=src_lang,
-                tgt_lang=tgt_lang
-            )
-        )
-        
-        response_time_ms = int((time.time() - start_time) * 1000)
+        # Call Hugging Face Inference API
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(HF_API_URL, json=payload, headers=headers)
+            
+            response_time_ms = int((time.time() - start_time) * 1000)
+            
+            if response.status_code != 200:
+                log_interaction(
+                    intent="translation",
+                    tenant_id=tenant_id,
+                    success=False,
+                    error=f"API returned status {response.status_code}",
+                    response_time_ms=response_time_ms,
+                    source_lang=src_lang,
+                    target_lang=tgt_lang,
+                    fallback_used=True
+                )
+                return {
+                    "translated_text": text,  # Fallback to original
+                    "source_lang": src_lang,
+                    "target_lang": tgt_lang,
+                    "original_text": text,
+                    "available": False,
+                    "error": f"Translation API error: {response.status_code}",
+                    "response_time_ms": response_time_ms
+                }
+            
+            results = response.json()
         
         # Validate results
         if not results or not isinstance(results, list) or len(results) == 0:
@@ -396,6 +354,28 @@ async def translate_text(
             "target_lang": tgt_lang,
             "original_text": text,
             "available": True,
+            "response_time_ms": response_time_ms
+        }
+
+    except httpx.TimeoutException:
+        response_time_ms = int((time.time() - start_time) * 1000)
+        log_interaction(
+            intent="translation",
+            tenant_id=tenant_id,
+            success=False,
+            error="Translation request timed out",
+            response_time_ms=response_time_ms,
+            source_lang=src_lang,
+            target_lang=tgt_lang,
+            fallback_used=True
+        )
+        return {
+            "translated_text": text,  # Fallback to original
+            "source_lang": src_lang,
+            "target_lang": tgt_lang,
+            "original_text": text,
+            "available": False,
+            "error": "Translation request timed out.",
             "response_time_ms": response_time_ms
         }
 

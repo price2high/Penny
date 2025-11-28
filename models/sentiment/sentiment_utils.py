@@ -8,83 +8,18 @@ Provides async sentiment analysis with structured error handling and logging.
 
 import asyncio
 import time
+import os
+import httpx
 from typing import Dict, Any, Optional, List
 
 # --- Logging Imports ---
 from app.logging_utils import log_interaction, sanitize_for_logging
 
-# --- Model Loader Import ---
-try:
-    from app.model_loader import load_model_pipeline
-    MODEL_LOADER_AVAILABLE = True
-except ImportError:
-    MODEL_LOADER_AVAILABLE = False
-    import logging
-    logging.getLogger(__name__).warning("Could not import load_model_pipeline. Sentiment service unavailable.")
+# --- Hugging Face API Configuration ---
+HF_API_URL = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
+HF_TOKEN = os.getenv("HF_TOKEN")
 
-# Global variable to store the loaded pipeline for re-use
-SENTIMENT_PIPELINE: Optional[Any] = None
 AGENT_NAME = "penny-sentiment-agent"
-INITIALIZATION_ATTEMPTED = False
-
-
-def _initialize_sentiment_pipeline() -> bool:
-    """
-    Initializes the sentiment pipeline only once.
-    
-    Returns:
-        bool: True if initialization succeeded, False otherwise.
-    """
-    global SENTIMENT_PIPELINE, INITIALIZATION_ATTEMPTED
-    
-    if INITIALIZATION_ATTEMPTED:
-        return SENTIMENT_PIPELINE is not None
-    
-    INITIALIZATION_ATTEMPTED = True
-    
-    if not MODEL_LOADER_AVAILABLE:
-        log_interaction(
-            intent="sentiment_initialization",
-            success=False,
-            error="model_loader unavailable"
-        )
-        return False
-    
-    try:
-        log_interaction(
-            intent="sentiment_initialization",
-            success=None,
-            details=f"Loading {AGENT_NAME}"
-        )
-        
-        SENTIMENT_PIPELINE = load_model_pipeline(AGENT_NAME)
-        
-        if SENTIMENT_PIPELINE is None:
-            log_interaction(
-                intent="sentiment_initialization",
-                success=False,
-                error="Pipeline returned None"
-            )
-            return False
-        
-        log_interaction(
-            intent="sentiment_initialization",
-            success=True,
-            details=f"Model {AGENT_NAME} loaded successfully"
-        )
-        return True
-        
-    except Exception as e:
-        log_interaction(
-            intent="sentiment_initialization",
-            success=False,
-            error=str(e)
-        )
-        return False
-
-
-# Attempt initialization at module load
-_initialize_sentiment_pipeline()
 
 
 def is_sentiment_available() -> bool:
@@ -92,9 +27,9 @@ def is_sentiment_available() -> bool:
     Check if sentiment analysis service is available.
     
     Returns:
-        bool: True if sentiment pipeline is loaded and ready.
+        bool: True if sentiment API is configured and ready.
     """
-    return SENTIMENT_PIPELINE is not None
+    return HF_TOKEN is not None and len(HF_TOKEN) > 0
 
 
 async def get_sentiment_analysis(
@@ -117,8 +52,6 @@ async def get_sentiment_analysis(
             - response_time_ms (int, optional): Analysis time in milliseconds
     """
     start_time = time.time()
-    
-    global SENTIMENT_PIPELINE
 
     # Check availability
     if not is_sentiment_available():
@@ -126,7 +59,7 @@ async def get_sentiment_analysis(
             intent="sentiment_analysis",
             tenant_id=tenant_id,
             success=False,
-            error="Sentiment pipeline not available",
+            error="Sentiment API not configured (missing HF_TOKEN)",
             fallback_used=True
         )
         return {
@@ -168,18 +101,38 @@ async def get_sentiment_analysis(
         }
 
     try:
-        loop = asyncio.get_event_loop()
+        # Prepare API request
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+        payload = {"inputs": text}
         
-        # Run model inference in thread executor
-        # Hugging Face pipelines accept lists and return lists
-        results = await loop.run_in_executor(
-            None,
-            lambda: SENTIMENT_PIPELINE([text])
-        )
-        
-        response_time_ms = int((time.time() - start_time) * 1000)
+        # Call Hugging Face Inference API
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(HF_API_URL, json=payload, headers=headers)
+            
+            response_time_ms = int((time.time() - start_time) * 1000)
+            
+            if response.status_code != 200:
+                log_interaction(
+                    intent="sentiment_analysis",
+                    tenant_id=tenant_id,
+                    success=False,
+                    error=f"API returned status {response.status_code}",
+                    response_time_ms=response_time_ms,
+                    text_preview=sanitize_for_logging(text[:100]),
+                    fallback_used=True
+                )
+                return {
+                    "label": "ERROR",
+                    "score": 0.0,
+                    "available": False,
+                    "message": f"Sentiment API error: {response.status_code}",
+                    "response_time_ms": response_time_ms
+                }
+            
+            results = response.json()
         
         # Validate results
+        # API returns: [[{"label": "LABEL_2", "score": 0.95}, ...]]
         if not results or not isinstance(results, list) or len(results) == 0:
             log_interaction(
                 intent="sentiment_analysis",
@@ -196,7 +149,26 @@ async def get_sentiment_analysis(
                 "message": "Sentiment analysis returned unexpected format."
             }
         
-        result = results[0]
+        # Get the first (highest scoring) result
+        result_list = results[0] if isinstance(results[0], list) else results
+        
+        if not result_list or len(result_list) == 0:
+            log_interaction(
+                intent="sentiment_analysis",
+                tenant_id=tenant_id,
+                success=False,
+                error="Empty result list",
+                response_time_ms=response_time_ms,
+                text_preview=sanitize_for_logging(text[:100])
+            )
+            return {
+                "label": "ERROR",
+                "score": 0.0,
+                "available": True,
+                "message": "Sentiment analysis returned unexpected format."
+            }
+        
+        result = result_list[0]
         
         # Validate result structure
         if not isinstance(result, dict) or 'label' not in result or 'score' not in result:
@@ -215,6 +187,15 @@ async def get_sentiment_analysis(
                 "message": "Sentiment analysis returned unexpected format."
             }
         
+        # Map RoBERTa labels to readable format
+        # LABEL_0 = NEGATIVE, LABEL_1 = NEUTRAL, LABEL_2 = POSITIVE
+        label_mapping = {
+            "LABEL_0": "NEGATIVE",
+            "LABEL_1": "NEUTRAL",
+            "LABEL_2": "POSITIVE"
+        }
+        label = label_mapping.get(result['label'], result['label'])
+        
         # Log slow analysis
         if response_time_ms > 3000:  # 3 seconds
             log_interaction(
@@ -231,15 +212,34 @@ async def get_sentiment_analysis(
             tenant_id=tenant_id,
             success=True,
             response_time_ms=response_time_ms,
-            sentiment_label=result.get('label'),
+            sentiment_label=label,
             sentiment_score=result.get('score'),
             text_length=len(text)
         )
         
         return {
-            "label": result['label'],
+            "label": label,
             "score": float(result['score']),
             "available": True,
+            "response_time_ms": response_time_ms
+        }
+
+    except httpx.TimeoutException:
+        response_time_ms = int((time.time() - start_time) * 1000)
+        log_interaction(
+            intent="sentiment_analysis",
+            tenant_id=tenant_id,
+            success=False,
+            error="Sentiment analysis request timed out",
+            response_time_ms=response_time_ms,
+            text_preview=sanitize_for_logging(text[:100]),
+            fallback_used=True
+        )
+        return {
+            "label": "ERROR",
+            "score": 0.0,
+            "available": False,
+            "message": "Sentiment analysis request timed out.",
             "response_time_ms": response_time_ms
         }
 
@@ -294,8 +294,6 @@ async def analyze_sentiment_batch(
             - response_time_ms (int, optional): Total batch analysis time
     """
     start_time = time.time()
-    
-    global SENTIMENT_PIPELINE
 
     # Check availability
     if not is_sentiment_available():
@@ -303,7 +301,7 @@ async def analyze_sentiment_batch(
             intent="sentiment_batch_analysis",
             tenant_id=tenant_id,
             success=False,
-            error="Sentiment pipeline not available",
+            error="Sentiment API not configured (missing HF_TOKEN)",
             batch_size=len(texts) if texts else 0
         )
         return {
@@ -348,15 +346,52 @@ async def analyze_sentiment_batch(
         }
 
     try:
-        loop = asyncio.get_event_loop()
+        # Prepare API request with batch input
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+        payload = {"inputs": valid_texts}
         
-        # Run batch inference in thread executor
-        results = await loop.run_in_executor(
-            None,
-            lambda: SENTIMENT_PIPELINE(valid_texts)
-        )
+        # Call Hugging Face Inference API
+        async with httpx.AsyncClient(timeout=60.0) as client:  # Longer timeout for batch
+            response = await client.post(HF_API_URL, json=payload, headers=headers)
+            
+            response_time_ms = int((time.time() - start_time) * 1000)
+            
+            if response.status_code != 200:
+                log_interaction(
+                    intent="sentiment_batch_analysis",
+                    tenant_id=tenant_id,
+                    success=False,
+                    error=f"API returned status {response.status_code}",
+                    response_time_ms=response_time_ms,
+                    batch_size=len(valid_texts)
+                )
+                return {
+                    "results": [],
+                    "available": False,
+                    "total_analyzed": 0,
+                    "message": f"Sentiment API error: {response.status_code}",
+                    "response_time_ms": response_time_ms
+                }
+            
+            results = response.json()
         
-        response_time_ms = int((time.time() - start_time) * 1000)
+        # Process results and map labels
+        label_mapping = {
+            "LABEL_0": "NEGATIVE",
+            "LABEL_1": "NEUTRAL",
+            "LABEL_2": "POSITIVE"
+        }
+        
+        processed_results = []
+        if results and isinstance(results, list):
+            for item in results:
+                if isinstance(item, list) and len(item) > 0:
+                    top_result = item[0]
+                    if isinstance(top_result, dict) and 'label' in top_result:
+                        processed_results.append({
+                            "label": label_mapping.get(top_result['label'], top_result['label']),
+                            "score": float(top_result.get('score', 0.0))
+                        })
         
         log_interaction(
             intent="sentiment_batch_analysis",
@@ -364,13 +399,32 @@ async def analyze_sentiment_batch(
             success=True,
             response_time_ms=response_time_ms,
             batch_size=len(valid_texts),
-            total_analyzed=len(results) if results else 0
+            total_analyzed=len(processed_results)
         )
         
         return {
-            "results": results if results else [],
+            "results": processed_results,
             "available": True,
-            "total_analyzed": len(results) if results else 0,
+            "total_analyzed": len(processed_results),
+            "response_time_ms": response_time_ms
+        }
+
+    except httpx.TimeoutException:
+        response_time_ms = int((time.time() - start_time) * 1000)
+        log_interaction(
+            intent="sentiment_batch_analysis",
+            tenant_id=tenant_id,
+            success=False,
+            error="Batch sentiment analysis timed out",
+            response_time_ms=response_time_ms,
+            batch_size=len(valid_texts)
+        )
+        return {
+            "results": [],
+            "available": False,
+            "total_analyzed": 0,
+            "message": "Batch sentiment analysis timed out.",
+            "error": "Request timeout",
             "response_time_ms": response_time_ms
         }
 

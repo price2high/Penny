@@ -2,8 +2,8 @@
   "penny-core-agent": {
     "model_name": "google/gemma-7b-it",
     "task": "text-generation",
-    "endpoint": "azure-ml",
-    "fallback_endpoint": "local",
+    "endpoint": "huggingface-api",
+    "api_url": "https://api-inference.huggingface.co/models/google/gemma-7b-it",
     "timeout_seconds": 30,
     "max_retries": 2,
     "description": "Penny's core conversational AI for civic engagement responses"
@@ -11,8 +11,8 @@
   "penny-doc-agent": {
     "model_name": "microsoft/layoutlmv3-base",
     "task": "pdf-extraction",
-    "endpoint": "azure-ml",
-    "fallback_endpoint": "local",
+    "endpoint": "huggingface-api",
+    "api_url": "https://api-inference.huggingface.co/models/microsoft/layoutlmv3-base",
     "timeout_seconds": 45,
     "max_retries": 2,
     "description": "Document understanding and PDF extraction for civic documents"
@@ -20,8 +20,8 @@
   "penny-translate-agent": {
     "model_name": "facebook/nllb-200-distilled-600M",
     "task": "translation",
-    "endpoint": "azure-ml",
-    "fallback_endpoint": "local",
+    "endpoint": "huggingface-api",
+    "api_url": "https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M",
     "timeout_seconds": 20,
     "max_retries": 2,
     "description": "Multilingual translation service for accessible civic information"
@@ -29,8 +29,8 @@
   "penny-sentiment-agent": {
     "model_name": "cardiffnlp/twitter-roberta-base-sentiment",
     "task": "sentiment-analysis",
-    "endpoint": "azure-ml",
-    "fallback_endpoint": "local",
+    "endpoint": "huggingface-api",
+    "api_url": "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment",
     "timeout_seconds": 15,
     "max_retries": 2,
     "description": "Sentiment analysis for community feedback and engagement monitoring"
@@ -38,8 +38,8 @@
   "penny-bias-checker": {
     "model_name": "facebook/bart-large-mnli",
     "task": "bias-detection",
-    "endpoint": "azure-ml",
-    "fallback_endpoint": "local",
+    "endpoint": "huggingface-api",
+    "api_url": "https://api-inference.huggingface.co/models/facebook/bart-large-mnli",
     "timeout_seconds": 20,
     "max_retries": 2,
     "description": "Bias detection to ensure fair and equitable civic information"
